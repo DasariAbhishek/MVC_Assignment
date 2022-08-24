@@ -1,0 +1,101 @@
+﻿@model FootBallLeagueMVC.Models.FootBallLeague
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddRecords</title>
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h1>FootBallLeague</h1>
+            <h2>Add Match Records</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="InputElements">
+                @Html.DisplayNameFor(model => model.MatchID)
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.MatchID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MatchID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="InputElements">
+                @Html.DisplayNameFor(model => model.TeamName1)
+                <div class="InputElements">
+                    @Html.TextBoxFor(model => model.TeamName1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TeamName1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="InputElements">
+                @Html.DisplayNameFor(model => model.TeamName2)
+                <div class="InputElements">
+                    @Html.TextBoxFor(model => model.TeamName2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TeamName2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="InputElements">
+                @Html.DisplayNameFor(model => model.Status)
+                <div class="InputElements">
+                    @Html.DropDownListFor(model => model.Status, new List<SelectListItem> { new SelectListItem { Text = "Win",Value="Win"},new SelectListItem { Text="Draw",Value="Draw"} })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="InputElements">
+                @Html.DisplayNameFor(model => model.WinningTeam)
+                <div class="InputElements">
+                    @Html.TextBoxFor(model => model.WinningTeam, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.WinningTeam, "", new { @class = "text-danger" })
+                </div>
+            </div>
+    
+            <div class="InputElements">
+                @Html.DisplayNameFor(model => model.Points)
+                <div class="InputElements">
+                    @Html.TextBoxFor(model => model.Points, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Points, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="InputElements">
+                <div class="SavingElements">
+                    <input type="submit" value="Save Match Data" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
+<style>
+    .form-horizontal{
+        align-content:center;
+        background-color:aqua;
+    }
+    .InputElements{
+        align-items:center;
+    }
+    body{
+        text-align:center;
+        background-color:aqua
+    }
+</style>

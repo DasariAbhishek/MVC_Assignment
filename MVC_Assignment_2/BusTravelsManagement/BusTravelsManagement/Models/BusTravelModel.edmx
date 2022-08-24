@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BusTravelsManagementDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BusInfo">
+          <Key>
+            <PropertyRef Name="BusID" />
+          </Key>
+          <Property Name="BusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoardingPoint" Type="nvarchar" MaxLength="3" />
+          <Property Name="TravelDate" Type="date" />
+          <Property Name="Amount" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Rating" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BusTravelsManagementDB.dbo.Bus_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Bus_View">
+          <Key>
+            <PropertyRef Name="BusID" />
+          </Key>
+          <Property Name="BusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoardingPoint" Type="nvarchar" MaxLength="3" />
+        </EntityType>
+        <Function Name="spInsertBusInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BoardingPoint" Type="nvarchar" Mode="In" />
+          <Parameter Name="TravelDate" Type="date" Mode="In" />
+          <Parameter Name="Amount" Type="decimal" Mode="In" />
+          <Parameter Name="Rating" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BusTravelsManagementDBModelStoreContainer">
+          <EntitySet Name="BusInfo" EntityType="Self.BusInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bus_View" EntityType="Self.Bus_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Bus_View].[BusID] AS [BusID], 
+    [Bus_View].[BoardingPoint] AS [BoardingPoint]
+    FROM [dbo].[Bus_View] AS [Bus_View]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BusTravelsManagementDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BusInfo">
+          <Key>
+            <PropertyRef Name="BusID" />
+          </Key>
+          <Property Name="BusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoardingPoint" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="TravelDate" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Rating" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Bus_View">
+          <Key>
+            <PropertyRef Name="BusID" />
+          </Key>
+          <Property Name="BusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoardingPoint" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="BusTravelsManagementDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BusInfoes" EntityType="Self.BusInfo" />
+          <EntitySet Name="Bus_View" EntityType="Self.Bus_View" />
+          <FunctionImport Name="spInsertBusInfo">
+            <Parameter Name="BoardingPoint" Mode="In" Type="String" />
+            <Parameter Name="TravelDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="Rating" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BusTravelsManagementDBModelStoreContainer" CdmEntityContainer="BusTravelsManagementDB">
+          <EntitySetMapping Name="BusInfoes">
+            <EntityTypeMapping TypeName="BusTravelsManagementDBModel.BusInfo">
+              <MappingFragment StoreEntitySet="BusInfo">
+                <ScalarProperty Name="BusID" ColumnName="BusID" />
+                <ScalarProperty Name="BoardingPoint" ColumnName="BoardingPoint" />
+                <ScalarProperty Name="TravelDate" ColumnName="TravelDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bus_View">
+            <EntityTypeMapping TypeName="BusTravelsManagementDBModel.Bus_View">
+              <MappingFragment StoreEntitySet="Bus_View">
+                <ScalarProperty Name="BusID" ColumnName="BusID" />
+                <ScalarProperty Name="BoardingPoint" ColumnName="BoardingPoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spInsertBusInfo" FunctionName="BusTravelsManagementDBModel.Store.spInsertBusInfo" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

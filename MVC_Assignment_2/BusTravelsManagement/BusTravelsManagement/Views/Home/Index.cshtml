@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BusTravelsManagement.Models.BusInfo>
+@{
+    Layout = null;
+    ViewBag.Title = "BusFromMumbai";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Buses from Mumbai</title>
+</head>
+<body>
+    <h2>Buses From Mumbai</h2>
+    <table class="data">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BusID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BoardingPoint)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TravelDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(items => item.BusID)
+                </td>
+                <td>
+                    @Html.DisplayFor(items => item.BoardingPoint)
+                </td>
+                <td>
+                    @Html.DisplayFor(items => item.TravelDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(items => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(items => item.Rating)
+                </td>
+            </tr>
+
+        }
+    </table>
+</body>
+</html>
